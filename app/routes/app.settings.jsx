@@ -29,6 +29,7 @@ export const action = async ({ request }) => {
 
 export default function AdditionalPage() {
   const { data } = useLoaderData();
+
   const initialSettings = {
     showAnnouncement: true,
     message: "Free Shipping on Orders Over $50!",
