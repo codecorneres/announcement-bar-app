@@ -3,7 +3,7 @@
 client_id = "9d6b49187f2a5647472fe23dd23ea305"
 name = "announcement-bar-app"
 handle = "announcement-bar-app-14"
-application_url = "https://expressed-usa-nested-hub.trycloudflare.com"
+application_url = "https://announcement-bar-app.vercel.app"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://expressed-usa-nested-hub.trycloudflare.com/auth/callback",
-  "https://expressed-usa-nested-hub.trycloudflare.com/auth/shopify/callback",
-  "https://expressed-usa-nested-hub.trycloudflare.com/api/auth/callback"
+  "https://announcement-bar-app.vercel.app/auth/callback",
+  "https://announcement-bar-app.vercel.app/auth/shopify/callback",
+  "https://announcement-bar-app.vercel.app/api/auth/callback"
 ]
 
 [webhooks]
