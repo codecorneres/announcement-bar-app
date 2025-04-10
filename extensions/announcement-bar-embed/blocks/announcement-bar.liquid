@@ -1,0 +1,120 @@
+{% if block.settings.show_announcement %}
+  <div style="
+    background: {{ block.settings.bg_color }};
+    color: {{ block.settings.text_color }};
+    padding: {{ block.settings.padding }};
+    text-align: {{ block.settings.text_align }};
+    width: {{ block.settings.width }};
+    border: {{ block.settings.border_width }} solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }};
+    font-size: {{ block.settings.font_size }};
+    font-weight: {{ block.settings.font_weight }};
+    margin: 0 auto;
+  ">
+    {{ block.settings.message }}
+  </div>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "target": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Announcement message",
+      "default": "Free Shipping on Orders Over $50!"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "width",
+      "label": "Width (e.g. 100%, 1200px)",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "font_size",
+      "label": "Font size (e.g. 16px, 20px)",
+      "default": "18px"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "default": "normal",
+      "options": [
+        { "label": "Normal", "value": "normal" },
+        { "label": "Bold", "value": "bold" },
+        { "label": "Light", "value": "300" },
+        { "label": "Medium", "value": "500" },
+        { "label": "Semi Bold", "value": "600" },
+        { "label": "Extra Bold", "value": "800" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "border_width",
+      "label": "Border width (e.g. 1px, 2px)",
+      "default": "0px"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "text",
+      "id": "border_radius",
+      "label": "Border radius (e.g. 5px, 10px)",
+      "default": "5px"
+    },
+    {
+      "type": "text",
+      "id": "padding",
+      "label": "Padding (e.g. 10px, 20px 30px)",
+      "default": "10px"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        },
+      ]
+    }
+  ]
+}
+{% endschema %}
