@@ -1,26 +1,65 @@
-{% if block.settings.show_announcement %}
-  <div style="
-    background: {{ block.settings.bg_color }};
-    color: {{ block.settings.text_color }};
-    padding: {{ block.settings.padding }};
-    text-align: {{ block.settings.text_align }};
-    width: {{ block.settings.width }};
-    border: {{ block.settings.border_width }} solid {{ block.settings.border_color }};
-    border-radius: {{ block.settings.border_radius }};
-    font-size: {{ block.settings.font_size }};
-    font-weight: {{ block.settings.font_weight }};
-    margin: 0 auto;
-  ">
-    {{ block.settings.message }}
-  </div>
+{% assign metafields = shop.metafields.announcement_bar %}
+
+{% if block.settings.customize_bar != true %}
+  {%- assign show_announcement = metafields.show.value | default: block.settings.show_announcement -%}
+  {%- assign message = metafields.message.value | default: block.settings.message -%}
+  {%- assign bg_color = metafields.bg_color.value | default: block.settings.bg_color -%}
+  {%- assign text_color = metafields.text_color.value | default: block.settings.text_color -%}
+  {%- assign width = metafields.width.value | default: block.settings.width -%}
+  {%- assign font_size = metafields.font_size.value | default: block.settings.font_size -%}
+  {%- assign font_weight = metafields.font_weight.value | default: block.settings.font_weight -%}
+  {%- assign border_width = metafields.border_width.value | default: block.settings.border_width -%}
+  {%- assign border_color = metafields.border_color.value | default: block.settings.border_color -%}
+  {%- assign border_radius = metafields.border_radius.value | default: block.settings.border_radius -%}
+  {%- assign padding = metafields.padding.value | default: block.settings.padding -%}
+  {%- assign text_align = metafields.text_align.value | default: block.settings.text_align -%}
+{% else %}
+  {%- assign show_announcement = block.settings.show_announcement -%}
+  {%- assign message = block.settings.message -%}
+  {%- assign bg_color = block.settings.bg_color -%}
+  {%- assign text_color = block.settings.text_color -%}
+  {%- assign width = block.settings.width -%}
+  {%- assign font_size = block.settings.font_size -%}
+  {%- assign font_weight = block.settings.font_weight -%}
+  {%- assign border_width = block.settings.border_width -%}
+  {%- assign border_color = block.settings.border_color -%}
+  {%- assign border_radius = block.settings.border_radius -%}
+  {%- assign padding = block.settings.padding -%}
+  {%- assign text_align = block.settings.text_align -%}
 {% endif %}
 
+{% if show_announcement == true or show_announcement == 'true' %}
+  <div
+    id="announcement-bar"
+    style="
+      background: {{ bg_color }};
+      color: {{ text_color }};
+      padding: {{ padding }};
+      text-align: {{ text_align }};
+      width: {{ width }};
+      border: {{ border_width }} solid {{ border_color }};
+      border-radius: {{ border_radius }};
+      font-size: {{ font_size }};
+      font-weight: {{ font_weight }};
+      margin: 10px auto;
+    "
+  >
+    {{ message }}
+  </div>
+{% endif %}
 
 {% schema %}
 {
   "name": "Announcement Bar",
   "target": "section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "customize_bar",
+      "label": "Customize this announcement bar",
+      "default": false,
+      "info": "Check this to override the default shop settings and edit this bar manually."
+    },
     {
       "type": "checkbox",
       "id": "show_announcement",
@@ -101,18 +140,9 @@
       "label": "Text alignment",
       "default": "center",
       "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        },
+        { "label": "Left", "value": "left" },
+        { "label": "Center", "value": "center" },
+        { "label": "Right", "value": "right" }
       ]
     }
   ]

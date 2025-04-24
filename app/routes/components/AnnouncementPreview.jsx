@@ -1,33 +1,30 @@
 import React from "react";
 
 const AnnouncementPreview = ({
-  showAnnouncement,
   message,
-  bgColor,
-  textColor,
+  bg_color,
+  text_color,
   width,
-  fontSize,
-  fontWeight,
-  borderWidth,
-  borderColor,
-  borderRadius,
+  font_size,
+  font_weight,
+  border_width,
+  border_color,
+  border_radius,
   padding,
-  textAlign,
+  text_align,
 }) => {
-  if (!showAnnouncement) return null;
-
   return (
     <div
       style={{
-        background: bgColor,
-        color: textColor,
+        background: bg_color,
+        color: text_color,
         width,
-        fontSize,
-        fontWeight,
-        border: `${borderWidth} solid ${borderColor}`,
-        borderRadius,
+        fontSize: font_size,
+        fontWeight: font_weight,
+        border: `${border_width} solid ${border_color}`,
+        borderRadius: border_radius,
         padding,
-        textAlign,
+        textAlign: text_align,
         margin: "0 auto",
       }}
     >

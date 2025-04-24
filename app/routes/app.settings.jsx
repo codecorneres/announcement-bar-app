@@ -7,7 +7,6 @@ import {
   Select,
   InlineStack,
   Box,
-  Checkbox,
 } from "@shopify/polaris";
 import AnnouncementPreview from "./components/AnnouncementPreview";
 import actions from "./action/actions";
@@ -31,30 +30,26 @@ export default function AdditionalPage() {
   const { data } = useLoaderData();
 
   const initialSettings = {
-    showAnnouncement: true,
     message: "Free Shipping on Orders Over $50!",
-    bgColor: "#000000",
-    textColor: "#ffffff",
+    bg_color: "#000000",
+    text_color: "#ffffff",
     width: "100%",
-    fontSize: "18px",
-    fontWeight: "normal",
-    borderWidth: "0px",
-    borderColor: "#cccccc",
-    borderRadius: "5px",
+    font_size: "18px",
+    font_weight: "normal",
+    border_width: "0px",
+    border_color: "#cccccc",
+    border_radius: "5px",
     padding: "10px",
-    textAlign: "center",
+    text_align: "center",
   };
-  const [settings, setSettings] = useState(initialSettings);
+
+  const [settings, setSettings] = useState(
+    data && Object.keys(data).length > 0 ? data : initialSettings,
+  );
 
   const [loading, setLoading] = useState(false);
   const fetcher = useFetcher();
   const shopify = useAppBridge();
-
-  useEffect(() => {
-    if (data && Object.keys(data).length > 0) {
-      setSettings(data);
-    }
-  }, [data]);
 
   const handleSave = () => {
     setLoading(true);
@@ -121,7 +116,7 @@ export default function AdditionalPage() {
 
   return (
     <Page
-      title="Announcement Bar Settings"
+      title="Settings"
       fullWidth
       primaryAction={{
         content: "Save",
@@ -146,21 +141,21 @@ export default function AdditionalPage() {
               />
               <TextField
                 label="Font Size"
-                value={settings.fontSize}
-                onChange={handleChange("fontSize")}
+                value={settings.font_size}
+                onChange={handleChange("font_size")}
               />
 
               <Select
                 label="Font Weight"
                 options={fontWeightOptions}
-                value={settings.fontWeight}
-                onChange={handleChange("fontWeight")}
+                value={settings.font_weight}
+                onChange={handleChange("font_weight")}
               />
               <Select
                 label="Text Align"
                 options={textAlignOptions}
-                value={settings.textAlign}
-                onChange={handleChange("textAlign")}
+                value={settings.text_align}
+                onChange={handleChange("text_align")}
               />
 
               <TextField
@@ -176,37 +171,28 @@ export default function AdditionalPage() {
 
               <TextField
                 label="Border Radius"
-                value={settings.borderRadius}
-                onChange={handleChange("borderRadius")}
+                value={settings.border_radius}
+                onChange={handleChange("border_radius")}
               />
               <TextField
                 label="Border Width"
-                value={settings.borderWidth}
-                onChange={handleChange("borderWidth")}
+                value={settings.border_width}
+                onChange={handleChange("border_width")}
               />
 
-              {renderColorInput("Border Color", "borderColor")}
-              {renderColorInput("Background Color", "bgColor")}
-              {renderColorInput("Text Color", "textColor")}
-            </Box>
-            <Box>
-              <Checkbox
-                label="Show Announcement Bar"
-                checked={settings.showAnnouncement}
-                onChange={(value) => handleChange("showAnnouncement")(value)}
-              />
+              {renderColorInput("Border Color", "border_color")}
+              {renderColorInput("Background Color", "bg_color")}
+              {renderColorInput("Text Color", "text_color")}
             </Box>
           </Card>
         </Layout.Section>
 
         <Layout.Section variant="oneHalf">
-          {settings.showAnnouncement && (
-            <Card title="Live Preview" sectioned>
-              <Box padding="4" border="base" background="bg-surface">
-                <AnnouncementPreview {...settings} />
-              </Box>
-            </Card>
-          )}
+          <Card title="Live Preview" sectioned>
+            <Box padding="4" border="base" background="bg-surface">
+              <AnnouncementPreview {...settings} />
+            </Box>
+          </Card>
         </Layout.Section>
       </Layout>
     </Page>
